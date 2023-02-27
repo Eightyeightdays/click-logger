@@ -13,13 +13,14 @@ mongoose.connect(process.env.DB_URL,
 const cors = require("cors");
 app.use(cors({origin: true, credentials: true}));
 
-const clickRoutes = require("./routes/clickRoutes");
+const clickRoutes = require("./routes/clickRoutes.js");
 
 app.use(express.json());
 
-app.use((req, res) => {
-    res.json({ message: 'Votre requête a bien été reçue !' }); 
- });
-// app.use("/", clickRoutes);
+// app.use((req, res) => {
+//     res.json({ message: 'Votre requête a bien été reçue !' }); 
+// });
+
+app.use("/", clickRoutes);
 
 module.exports = app;
