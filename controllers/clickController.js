@@ -12,7 +12,7 @@ exports.click = (req, res) => {
     });
 
     click.save()
-        .then(() => res.status(201).json({message: "Click recorded"}))
+        .then(() => res.redirect(process.env.LINK_1))
         .catch(error => res.status(400).json({error}))
 }
 
@@ -22,8 +22,8 @@ exports.click2 = (req, res) => {
     });
 
     click.save()
-        .then(() => res.status(201).json({message: "Click2 recorded"}))
-        .catch(error => res.status(400).json({error}))
+    .then(() => res.redirect(process.env.LINK_2))
+    .catch(error => res.status(400).json({error}))
 }
 
 exports.click3 = (req, res) => {
@@ -32,8 +32,8 @@ exports.click3 = (req, res) => {
     });
 
     click.save()
-        .then(() => res.status(201).json({message: "Click3 recorded"}))
-        .catch(error => res.status(400).json({error}))
+    .then(() => res.redirect(process.env.LINK_3))
+    .catch(error => res.status(400).json({error}))
 }
 
 exports.click4 = (req, res) => {
@@ -42,8 +42,8 @@ exports.click4 = (req, res) => {
     });
 
     click.save()
-        .then(() => res.status(201).json({message: "Click4 recorded"}))
-        .catch(error => res.status(400).json({error}))
+    .then(() => res.redirect(process.env.LINK_4))
+    .catch(error => res.status(400).json({error}))
 }
 
 exports.click5 = (req, res) => {
@@ -52,8 +52,8 @@ exports.click5 = (req, res) => {
     });
 
     click.save()
-        .then(() => res.status(201).json({message: "Click5 recorded"}))
-        .catch(error => res.status(400).json({error}))
+    .then(() => res.redirect(process.env.LINK_5))
+    .catch(error => res.status(400).json({error}))
 }
 
 exports.click6 = (req, res) => {
@@ -62,6 +62,6 @@ exports.click6 = (req, res) => {
     });
 
     click.save()
-        .then(() => res.status(201).json({message: "Click6 recorded"}))
-        .catch(error => res.status(400).json({error}))
+    .then(() => res.redirect(process.env.LINK_6))
+    .catch(error => res.status(400).json({error}))
 }
