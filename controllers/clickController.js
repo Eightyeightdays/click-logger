@@ -62,7 +62,7 @@ exports.click6 = (req, res) => {
     });
 
     click.save()
-    // .then(() => res.redirect(process.env.LINK_6))
-    .then(() => res.status(200).json({message: "Deployment working correctly"}))
+    .then(() => res.redirect(process.env.LINK_6))
+    // .then(() => res.status(200).json({message: "Deployment working correctly"})) // FOR TESTING DEPLOYMENT
     .catch(error => res.status(400).json({error}))
 }
