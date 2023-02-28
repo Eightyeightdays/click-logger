@@ -4,4 +4,4 @@ const click = Schema({
     dateCreated: {type: String, required: true}
 })
 
-module.exports = mongoose.model("Click", click);
+module.exports = mongoose.model("Click1", click);

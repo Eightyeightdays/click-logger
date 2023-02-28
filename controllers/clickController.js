@@ -6,7 +6,7 @@ const Click5 = require("../models/clickModel5.js");
 const Click6 = require("../models/clickModel6.js");
 const dayjs = require("dayjs");
 
-exports.click = (req, res) => {
+exports.click1 = (req, res) => {
     const click = new Click({
         dateCreated: dayjs().format("dddd, MMMM D YYYY, HH:mm:ss a"),
     });

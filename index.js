@@ -11,7 +11,6 @@ mongoose.connect(process.env.DB_URL,
     .then(()=> console.log("Connected to MongoDB"))
     .catch(()=> console.log("Failed to connect to MongoDB"));
 
-
 app.use(cors({origin: true, credentials: true}));
 app.use(express.json());
 app.use("/", clickRoutes);

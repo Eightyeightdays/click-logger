@@ -1,5 +1,5 @@
 const http = require('http');
-const app = require('./app.js');
+const app = require('./index.js');
 const server = http.createServer(app);
 
 const normalizePort = val => {
