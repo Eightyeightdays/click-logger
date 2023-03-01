@@ -5,33 +5,25 @@ const Click4 = require("../models/clickModel4");
 const Click5 = require("../models/clickModel5");
 const Click6 = require("../models/clickModel6");
 
-exports.getAll1 = (req, res)=>{
-    Click1.find()
-    .then(clicks => res.status(200).json(clicks))
-    .catch(error => res.status(400).json({error}))
-}
-exports.getAll2 = (req, res)=>{
-    Click2.find()
-    .then(clicks => res.status(200).json(clicks))
-    .catch(error => res.status(400).json({error}))
-}
-exports.getAll3 = (req, res)=>{
-    Click3.find()
-    .then(clicks => res.status(200).json(clicks))
-    .catch(error => res.status(400).json({error}))
-}
-exports.getAll4 = (req, res)=>{
-    Click4.find()
-    .then(clicks => res.status(200).json(clicks))
-    .catch(error => res.status(400).json({error}))
-}
-exports.getAll5 = (req, res)=>{
-    Click5.find()
-    .then(clicks => res.status(200).json(clicks))
-    .catch(error => res.status(400).json({error}))
-}
-exports.getAll6 = (req, res)=>{
-    Click6.find()
-    .then(clicks => res.status(200).json(clicks))
-    .catch(error => res.status(400).json({error}))
+exports.total = async(req, res) =>{
+    try{
+        const click1 = await Click1.find();
+        const click2 = await Click2.find();
+        const click3 = await Click3.find();
+        const click4 = await Click4.find();
+        const click5 = await Click5.find();
+        const click6 = await Click6.find();
+
+        return res.status(200).json({
+            click1: click1, 
+            click2: click2,
+            click3: click3,
+            click4: click4,
+            click5: click5,
+            click6: click6,  
+        });
+
+    }catch(err){
+        return res.status(400).json(err);
+    }
 }
