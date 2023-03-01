@@ -14,14 +14,27 @@ exports.total = async(req, res) =>{
         const click5 = await Click5.find();
         const click6 = await Click6.find();
 
-        return res.status(200).json({
-            click1: click1, 
-            click2: click2,
-            click3: click3,
-            click4: click4,
-            click5: click5,
-            click6: click6,  
-        });
+        function getDates(arr){
+            var datesArray = [];
+            arr.map(el=> datesArray.push(el.dateCreated));
+            return datesArray;
+        }
+
+        const dates1 = getDates(click1);
+        const dates2 = getDates(click2);
+        const dates3 = getDates(click3);
+        const dates4 = getDates(click4);
+        const dates5 = getDates(click5);
+        const dates6 = getDates(click6);
+
+        return res.status(200).json([
+            dates1, 
+            dates2,
+            dates3,
+            dates4,
+            dates5,
+            dates6
+        ]);
 
     }catch(err){
         return res.status(400).json(err);
