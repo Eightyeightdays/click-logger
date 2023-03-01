@@ -1,9 +1,8 @@
-require('dotenv').config()
-const path = require("path");           // WHY?
-const express = require("express");
-const app = express();
 const clickRoutes = require("./routes/clickRoutes.js");
 const statsRoutes = require("./routes/statsRoutes.js");
+require('dotenv').config()
+const express = require("express");
+const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 
