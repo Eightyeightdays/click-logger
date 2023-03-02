@@ -1,5 +1,6 @@
 const clickRoutes = require("./routes/clickRoutes.js");
 const statsRoutes = require("./routes/statsRoutes.js");
+const connectionRoutes = require("./routes/connectionRoutes.js");
 require('dotenv').config()
 const express = require("express");
 const app = express();
@@ -15,5 +16,6 @@ app.use(cors({origin: true, credentials: true}));
 app.use(express.json());
 app.use("/", clickRoutes);
 app.use("/", statsRoutes);
+app.use("/", connectionRoutes);
 
 module.exports = app;
