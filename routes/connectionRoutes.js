@@ -4,6 +4,6 @@ const connectionController = require("../controllers/connectionController.js");
 const auth = require("../middleware/auth.js")
 
 router.post("/login", connectionController.login);     
-// ADD MIDDLEWARE for update applications
+router.put("/update", auth, connectionController.update)
 
 module.exports = router;

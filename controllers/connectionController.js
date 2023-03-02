@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const User = require("../models/userModel.js");
+const Application = require("../models/applicationModel.js")
+const dayjs = require("dayjs");
 
 exports.login = (req, res) =>{
     const email = req.body.email;
@@ -8,7 +10,6 @@ exports.login = (req, res) =>{
 
     User.findOne({email: email})
     .then(user =>{
-        console.log(user)
         if(!user){
             return res.status(400).json("Failed to validate user")
         }else{
@@ -26,4 +27,29 @@ exports.login = (req, res) =>{
         }
     })
     .catch(error => res.status(400).json(error))
+}
+
+exports.update = async (req, res) =>{
+    const applicationId = "6400bfc22ed5e4ebc9a9aded";
+    const DATE = dayjs().format("dddd, MMMM D YYYY, HH:mm:ss a");
+    const latestApplications = parseInt(req.body.applications);
+
+    // Application.findOne({_id: applicationId})
+    // .then(application =>{
+    //     var totalCount = application.count + latestApplications;
+    //     Application.updateOne({_id: applicationId}, {count: totalCount, lastUpdated:DATE})
+    //     .then(()=> res.status(200).json({message: "Data updated", count: totalCount, lastUpdated}))
+    //     .catch(error => res.status(400).json({error}))
+    // })
+
+    const application = await Application.findOne({_id: applicationId})
+    const oldCount = application.count;
+    const totalCount = oldCount + latestApplications;
+
+    
+    Application.updateOne({_id: applicationId}, {count: totalCount, lastUpdated:DATE})
+    .then(()=> res.status(200).json({message: "Data updated", count: totalCount, lastUpdated: DATE}))
+    .catch(error => res.status(400).json({error}))
+    
+    .catch(error => res.status(400).json("Application data not found"))
 }
