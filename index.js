@@ -1,7 +1,8 @@
+require('dotenv').config()
 const clickRoutes = require("./routes/clickRoutes.js");
 const statsRoutes = require("./routes/statsRoutes.js");
 const connectionRoutes = require("./routes/connectionRoutes.js");
-require('dotenv').config()
+const applicationStatsRoutes = require("./routes/appStatsRoutes.js")
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -17,5 +18,6 @@ app.use(express.json());
 app.use("/", clickRoutes);
 app.use("/", statsRoutes);
 app.use("/", connectionRoutes);
+app.use("/", applicationStatsRoutes);
 
 module.exports = app;
