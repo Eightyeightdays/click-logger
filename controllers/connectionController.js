@@ -14,13 +14,18 @@ exports.login = (req, res) =>{
             if(password !== user.password){
                 return res.status(401).json("Failed to validate user")
             }else{
-                const token =  jwt.sign(
-                    {userId: user._id},
-                    process.env.TOKEN_SECRET,
-                    {expiresIn: "10m"}
-                );
-
-                return res.status(200).json({token: token, userId: user._id});
+                console.log("PASSWORD CORRECT");
+                try{
+                    const token =  jwt.sign(
+                        {userId: user._id},
+                        process.env.TOKEN_SECRET,
+                        {expiresIn: "10m"}
+                    );
+                    return res.status(200).json({token: token, userId: user._id});
+                }catch(error){
+                    return res.status(400).json({error: error, message: "Error creating token"})
+                }
+                
             }
         }
     })
