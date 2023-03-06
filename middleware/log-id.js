@@ -1,12 +1,44 @@
 const Application = require("../models/newApplicationModel.js");
+const nodemailer = require("nodemailer");
 
 module.exports = async (req, res, next) =>{
     try{        
-        console.log("MIDDLEWARE")
         const application = await Application.findOne({cvid: req.query.cvid});
-        const companyName = application.company;
-        console.log(companyName)
-        // send email here
+        
+        let transporter = nodemailer.createTransport({
+            host: process.env.MAIL_HOST,
+            port: 465,
+            secure: true, 
+            auth: {
+              user: process.env.MAIL_USER, 
+              pass: process.env.MAIL_PASS, 
+            },
+            tls: {
+                rejectUnauthorized: false
+            }
+        });
+
+        // verify connection configuration
+        transporter.verify(function (error, success) {
+            if (error) {
+            console.log(error);
+            } else {
+            console.log("Server is ready to take our messages");
+            }
+        });
+
+        let info = await transporter.sendMail({
+            from: 'CV CLICK LOGGER', 
+            to: process.env.EMAIL, 
+            subject: `Someone clicked a link in your CV`, 
+            html: 
+            `<h1>${application.company} clicked a link in your CV</h1>
+            <p>You applied on ${application.dateApplied} for the role of ${application.jobTitle} located in ${application.location}.</p>
+            <a href=${application.link}>Follow this link to see the job details</a>
+            <h2>GOOD LUCK! &#129310;</h2>`, 
+        });
+
+        // console.log("EMAIL SENT");
 
         next();
     }catch(error){

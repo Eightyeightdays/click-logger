@@ -4,7 +4,6 @@ const Click3 = require("../models/clickModel3.js");
 const Click4 = require("../models/clickModel4.js");
 const Click5 = require("../models/clickModel5.js");
 const Click6 = require("../models/clickModel6.js");
-const Application = require("../models/newApplicationModel.js");
 const dayjs = require("dayjs");
 
 exports.handleClicks = (req, res) => {
