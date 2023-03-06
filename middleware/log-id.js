@@ -2,6 +2,12 @@ const Application = require("../models/newApplicationModel.js");
 const nodemailer = require("nodemailer");
 
 module.exports = async (req, res, next) =>{
+    
+    if(req.query.cvid == undefined){
+        // if the CV is an older version that was sent out before the code was updated it will not contain query parameters
+        next();
+    }
+    
     try{        
         const application = await Application.findOne({cvid: req.query.cvid});
         
