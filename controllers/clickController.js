@@ -4,14 +4,16 @@ const Click3 = require("../models/clickModel3.js");
 const Click4 = require("../models/clickModel4.js");
 const Click5 = require("../models/clickModel5.js");
 const Click6 = require("../models/clickModel6.js");
+const Application = require("../models/newApplicationModel.js");
 const dayjs = require("dayjs");
 
 exports.handleClicks = (req, res) => {
+    
     const DATE = dayjs().format("dddd, MMMM D YYYY, HH:mm:ss a");
     var record;
     var url;
 
-    switch(req.url){
+    switch(req.route.path){    // no longer req.url when params are added
         case "/link1":
             record = new Click({dateCreated: DATE});
             url = process.env.LINK_1;
@@ -27,18 +29,20 @@ exports.handleClicks = (req, res) => {
         case "/link4":
             record = new Click4({dateCreated: DATE});
             url = process.env.LINK_4;
-        break;
-        case "/link5":
-            record = new Click5({dateCreated: DATE});
-            url = process.env.LINK_5;
-        break;
-        case "/link6":
+            break;
+            case "/link5":
+                record = new Click5({dateCreated: DATE});
+                url = process.env.LINK_5;
+                break;
+                case "/link6":
             record = new Click6({dateCreated: DATE});
             url = process.env.LINK_6;
-        break;
-    }
-
+            break;
+    } 
+    
     record.save()
-        .then(()=> res.redirect(url))
-        .catch(error => res.status(400).json(error))
+    // .then(()=> res.status(200).json("SAVED")) // FOR TESTING
+    .then(()=> res.redirect(url))
+    .then(error=> res.status(400).json(error))
+        
 }
