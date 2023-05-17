@@ -40,8 +40,8 @@ exports.handleClicks = (req, res) => {
     } 
     
     record.save()
-    // .then(()=> res.status(200).json("SAVED")) // FOR TESTING
+    // .then(()=> res.status(200).json("Done")) // FOR TESTING
     .then(()=> res.redirect(url))
-    .then(error=> res.status(400).json(error))
+    // .then(error=> res.status(400).json(error))
         
 }

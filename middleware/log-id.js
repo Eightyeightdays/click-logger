@@ -2,14 +2,14 @@ const Application = require("../models/newApplicationModel.js");
 const nodemailer = require("nodemailer");
 
 module.exports = async (req, res, next) =>{
-    
     if(req.query.cvid == undefined){
         // if the CV is an older version that was sent out before the code was updated it will not contain query parameters
         next();
     }
     
-    try{        
-        const application = await Application.findOne({cvid: req.query.cvid});
+    try{       
+        const application = await Application.findOne({cvid: req.query.cvid}); // need to handle errors if not found
+
         const sendMail = async()=>{
             let transporter = nodemailer.createTransport({
                 host: process.env.MAIL_HOST,
@@ -34,7 +34,7 @@ module.exports = async (req, res, next) =>{
             });
 
             let info = await transporter.sendMail({
-                from: 'CV CLICK LOGGER', 
+                from: {name: 'CV CLICK LOGGER', address: process.env.MAIL_USER}, 
                 to: process.env.EMAIL, 
                 subject: `Someone clicked a link in your CV`, 
                 html: 
@@ -43,10 +43,9 @@ module.exports = async (req, res, next) =>{
                 <a href=${application.link}>Follow this link to see the job details</a>
                 <h2>GOOD LUCK! &#129310;</h2>`, 
             });
+
         }
         await sendMail();
-
-        // console.log("EMAIL SENT");
 
         next();
     }catch(error){
